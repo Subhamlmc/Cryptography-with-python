@@ -1,0 +1,17 @@
+import time
+alphabet="ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+userinput=input("Enter the rotated text  :").upper().strip()
+output_message=""
+#Here no shift is used because all possible rotations are just 26 times
+for shift in range(0,26):
+    output_message=""
+    for i in range(0,len(userinput)):
+       x=userinput[i]
+       if x in alphabet :
+           location=alphabet.find(x)
+           new_location=(location+shift)%26
+           output_message+=alphabet[new_location]
+       else :
+         output_message+=x
+
+    print(f"\nThe output of the text you provided is {output_message}")
