@@ -1,18 +1,44 @@
-#! /usr/bin/python3
-#This program is solely for xor-encryption with Text provided and a key !!
+#!/usr/bin/python3
+# This program is solely for XOR encryption with text provided and a key!!
+
 import time
 import binascii
-userinput=input("Enter the text message :")
-key=input("Enter the key that will be used to encrypt as well as  decrypt this text too :")
-print("Loading!! just a sec ......")
-time.sleep(3)
+import sys
+
+# ANSI color codes
+GREEN = '\033[92m'
+YELLOW = '\033[93m'
+CYAN = '\033[96m'
+RESET = '\033[0m'
+
+# Fancy input prompts
+print(f"{CYAN}XOR Encryption Program {RESET}")
+print("-" * 40)
+
+userinput = input(f"{YELLOW}Enter the text message:{RESET} ")
+key = input(f"{YELLOW}Enter the key that will be used to encrypt as well as decrypt this text too:{RESET} ")
+
+# Fancy loading animation
+print(f"{GREEN}Loading!! just a sec ......{RESET}")
+for _ in range(3):
+    time.sleep(0.5)
+    sys.stdout.write(".")
+    sys.stdout.flush()
+print()
+
 ciphertext = bytearray()
-for i in range (0,len(userinput)):
-    x=userinput[i]
-    k=key[i % len(key)]
-    product=ord(x) ^ ord(k)
+for i in range(len(userinput)):
+    x = userinput[i]
+    k = key[i % len(key)] # suppose i=1 and key=hi then k=[0%2] ==1 the value of k[1] is h so this process continues until the message ends !!
+    product = ord(x) ^ ord(k)
     ciphertext.append(product)
-    hex_output = binascii.hexlify(ciphertext).decode()
-print("Wait!! the text is being encoded  !!")
-time.sleep(2)
-print(f"The xor value of the text you provided is :{hex_output}")
+
+hex_output = binascii.hexlify(ciphertext).decode()
+
+# More fancy output
+print(f"\n{CYAN}Wait!! the text is being encoded!!{RESET}")
+time.sleep(1.5)
+
+print(f"{GREEN}The XOR encrypted value (in hex) is:{RESET} {hex_output}")
+print("-" * 40)
+print(f"{CYAN} Done! You can now decrypt it using the same key.{RESET}")
