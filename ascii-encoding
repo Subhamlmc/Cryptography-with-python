@@ -1,23 +1,41 @@
-#! /usr/bin/python3
+#!/usr/bin/python3
+"""
+Author:Subham Lamichhane
+Description: This script converts user input to and from Base64 format using UTF-8 encoding.
+"""
+
 import base64
 import time
+
+# Inform the user about the program's purpose
 print("This program will convert a text into base64 format or vice versa ")
 print("Loading !! Please wait !! just a sec .....")
+
+# Pause for a more interactive feel
 time.sleep(3)
+
+# Prompt user for operation type
 print('Press "E" for encoding a text while "D" for decoding a text !!')
-ask=input("Enter your decision :").upper()
-if ask=="E":
-    userinput=input("Enter your message :")
-    encoded_textbefore=base64.b64encode(userinput.encode('utf-8'))
-    encoded_text=encoded_textbefore.decode()
+ask = input("Enter your decision :").upper()
+
+# Encode a message into Base64
+if ask == "E":
+    userinput = input("Enter your message :")
+    encoded_textbefore = base64.b64encode(userinput.encode('utf-8'))  # Convert to bytes, then base64
+    encoded_text = encoded_textbefore.decode()  # Convert bytes to string for readable output
     print(f"The encoded text is :{encoded_text}.")
     print("Successfully encoded !!")
-elif ask=="D":
-    userinput=input("Enter your message :")
-    decoded_text=base64.b64decode(userinput.encode()).decode('utf-8')
+
+# Decode a Base64 message into plain text
+elif ask == "D":
+    userinput = input("Enter your message :")
+    decoded_text = base64.b64decode(userinput.encode()).decode('utf-8')  # Decode from base64 then bytes to string
     print(f"The encoded text is :{decoded_text}.")
     print("Successfully decoded !!")
-else :
+
+# Handle invalid input
+else:
     print("Press either E or D ")
+
 
 
