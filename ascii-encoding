@@ -1,0 +1,23 @@
+#! /usr/bin/python3
+import base64
+import time
+print("This program will convert a text into base64 format or vice versa ")
+print("Loading !! Please wait !! just a sec .....")
+time.sleep(3)
+print('Press "E" for encoding a text while "D" for decoding a text !!')
+ask=input("Enter your decision :").upper()
+if ask=="E":
+    userinput=input("Enter your message :")
+    encoded_textbefore=base64.b64encode(userinput.encode('utf-8'))
+    encoded_text=encoded_textbefore.decode()
+    print(f"The encoded text is :{encoded_text}.")
+    print("Successfully encoded !!")
+elif ask=="D":
+    userinput=input("Enter your message :")
+    decoded_text=base64.b64decode(userinput.encode()).decode('utf-8')
+    print(f"The encoded text is :{decoded_text}.")
+    print("Successfully decoded !!")
+else :
+    print("Press either E or D ")
+
+
