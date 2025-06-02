@@ -20,3 +20,8 @@ for i in range(len(cipher_bytes)):
     decrypted += chr(cipher_bytes[i] ^ ord(k))
 
 print("The decrypted message is:", decrypted)
+# This script performs XOR decryption using a provided key.
+# It expects a hex-encoded string (output from the XOR encryption script),
+# converts it back to raw bytes, and applies the XOR operation again
+# to recover the original plaintext message.
+
