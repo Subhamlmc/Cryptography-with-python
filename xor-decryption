@@ -1,0 +1,22 @@
+#!/usr/bin/python3
+# This program is for XOR decryption with a key
+
+import binascii
+print("Replace the orginal text with encrypted text and then use the same key to obtain origianl message ")
+cipher_hex = input("Enter the XOR encrypted hex string: ")
+key = input("Enter the key used to encrypt this text: ")
+
+# Convert hex string back to bytes
+try:
+    cipher_bytes = binascii.unhexlify(cipher_hex)
+except binascii.Error:
+    print("Invalid hex input.")
+    exit(1)
+
+# XOR each byte with key
+decrypted = ""
+for i in range(len(cipher_bytes)):
+    k = key[i % len(key)]
+    decrypted += chr(cipher_bytes[i] ^ ord(k))
+
+print("The decrypted message is:", decrypted)
