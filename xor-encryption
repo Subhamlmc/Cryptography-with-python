@@ -1,0 +1,18 @@
+#! /usr/bin/python3
+#This program is solely for xor-encryption with Text provided and a key !!
+import time
+import binascii
+userinput=input("Enter the text message :")
+key=input("Enter the key that will be used to encrypt as well as  decrypt this text too :")
+print("Loading!! just a sec ......")
+time.sleep(3)
+ciphertext = bytearray()
+for i in range (0,len(userinput)):
+    x=userinput[i]
+    k=key[i % len(key)]
+    product=ord(x) ^ ord(k)
+    ciphertext.append(product)
+    hex_output = binascii.hexlify(ciphertext).decode()
+print("Wait!! the text is being encoded  !!")
+time.sleep(2)
+print(f"The xor value of the text you provided is :{hex_output}")
