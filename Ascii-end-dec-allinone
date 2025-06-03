@@ -1,0 +1,57 @@
+import time
+import base64
+import os
+
+def process_file(filename, mode):
+    output_message = ""
+    
+    with open(filename, 'r', encoding='utf-8') as file:
+        content = file.read()
+        
+        for char in content:
+            if mode == "encrypt":
+                encoded_text = base64.b64encode(char.encode('utf-8')).decode()
+            else:  # decrypt
+                try:
+                    decoded_text = base64.b64decode(char.encode('utf-8')).decode()
+                except:
+                    print(f"Error decoding character: {char}")
+                    return None
+            output_message += encoded_text if mode == "encrypt" else decoded_text
+    
+    return output_message
+
+filename = input("Enter the name of the file or provide full path if needed: ").strip(' " ')
+mode = input("Do you want to encrypt or decrypt the file? (encrypt/decrypt): ").strip().lower()
+
+if mode not in ["encrypt", "decrypt"]:
+    print("Invalid mode selected. Exiting...")
+    exit()
+
+processed_text = process_file(filename, mode)
+
+if processed_text is None:
+    print("An error occurred during processing. Exiting...")
+    exit()
+
+askuser = input("Enter the name for the new file to save: ").strip()
+
+print("Processing... Please wait.")
+time.sleep(3)
+
+output_path = fr"C:\Users\Dell\Downloads\{askuser}"
+with open(output_path, "w", encoding="utf-8") as file1:
+    file1.write(processed_text)
+
+print(f"The {mode}ed file has been saved in the Download directory.")
+
+# Ask the user whether to delete the original file
+delete_choice = input("Do you want to delete the original file? (yes/no): ").strip().lower()
+if delete_choice == "yes":
+    try:
+        os.remove(filename)
+        print("Original file deleted successfully.")
+    except Exception as e:
+        print(f"Error deleting file: {e}")
+
+print("Process completed successfully!")
