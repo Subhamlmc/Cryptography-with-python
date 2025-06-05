@@ -1,3 +1,5 @@
+#! /usr/bin/python3
+# you can strip for word to decode instead of byte by byte
 import time
 import base64
 filename=input("Enter the name of file or provide full path if raised error :").strip(' " ')
