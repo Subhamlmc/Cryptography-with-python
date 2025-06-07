@@ -1,1 +1,22 @@
+import hashlib
+import time
+print("Instructions before use ")
+print("The file should contain a password in a line.")
+time.sleep(2)
+print("If the hash of the password matches then the password with matched hashed will be displayed !!")
+time.sleep(2)
+file_ask=input("Enter the filename that contains the password or specify the full path:").strip('"')
+capture=input("Enter the hash of the password you have captured :")
+print("----loading----")
+time.sleep(2)
+#function that deals with password handling
+def has_generator(text):
+    return hashlib.sha256(text.encode()).hexdigest()
 
+
+#dealing with line of files
+
+with open(fr'{file_ask}',"r") as file :
+    for line in file :
+        x=print(line)
+        
