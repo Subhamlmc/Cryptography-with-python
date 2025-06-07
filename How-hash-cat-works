@@ -10,13 +10,20 @@ capture=input("Enter the hash of the password you have captured :")
 print("----loading----")
 time.sleep(2)
 #function that deals with password handling
-def has_generator(text):
-    return hashlib.sha256(text.encode()).hexdigest()
+def has_generator(x):
+    password_hash_from_file=hashlib.sha256(x.encode()).hexdigest()
+    flag=True
+    while flag:
+     if password_hash_from_file == capture :
+         flag=False
+         print("The password with matched hash is in the file !!.")
+    
 
 
 #dealing with line of files
-
-with open(fr'{file_ask}',"r") as file :
-    for line in file :
-        x=print(line)
-        
+def pass_returner():
+    
+ with open(fr'{file_ask}',"r") as file :
+     for line in file :
+         x=print(line)
+         return x
