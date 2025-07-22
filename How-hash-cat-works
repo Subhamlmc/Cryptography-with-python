@@ -1,29 +1,38 @@
 import hashlib
 import time
-print("Instructions before use ")
+
+print("Instructions before use")
 print("The file should contain a password in a line.")
 time.sleep(2)
-print("If the hash of the password matches then the password with matched hashed will be displayed !!")
+print("If the hash of the password matches then the password with matched hash will be displayed!!")
 time.sleep(2)
-file_ask=input("Enter the filename that contains the password or specify the full path:").strip('"')
-capture=input("Enter the hash of the password you have captured :")
+
+file_ask = input("Enter the filename that contains the password or specify the full path: ").strip('"')
+capture = input("Enter the hash of the password you have captured: ").strip()
 print("----loading----")
 time.sleep(2)
-#function that deals with password handling
-def has_generator(x):
-    password_hash_from_file=hashlib.sha256(x.encode()).hexdigest()
-    flag=True
-    while flag:
-     if password_hash_from_file == capture :
-         flag=False
-         print("The password with matched hash is in the file !!.")
-    
 
+# Function to compare hash of a password line with the captured hash
+def has_generator(password_line):
+    password_line = password_line.strip()  
+    password_hash = hashlib.sha256(password_line.encode()).hexdigest()
+    if password_hash == capture:
+        print(f"[MATCH] Password found: '{password_line}'")
+        return True
+    return False
 
-#dealing with line of files
+# Function to read lines from file and check each line
 def pass_returner():
-    
- with open(fr'{file_ask}',"r") as file :
-     for line in file :
-         x=print(line)
-         return x
+    try:
+        with open(file_ask, "r") as file:
+            for line in file:
+                if has_generator(line):
+                    break
+            else:
+                print("No matching password found in the file.")
+    except FileNotFoundError:
+        print(" File not found. Please check the filename or path.")
+    except Exception as e:
+        print(f" An error occurred: {e}")
+
+pass_returner()
